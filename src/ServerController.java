@@ -21,7 +21,7 @@ public class ServerController {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             if ("POST".equals(exchange.getRequestMethod())) {
-                String response = "{\"message\": \"Hello, This is a POST response!\"}";
+                String response = "{\"message\": \"Hello, this is a POST response!\"}";
                 exchange.sendResponseHeaders(200, response.length());
                 OutputStream os = exchange.getResponseBody();
                 os.write(response.getBytes());
@@ -36,7 +36,7 @@ public class ServerController {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             if ("GET".equals(exchange.getRequestMethod())) {
-                String response = "{\"message\": \"Hello, This is a GET response!\"}";
+                String response = "{\"message\": \"Hello, this is a GET response!\"}";
                 exchange.sendResponseHeaders(200, response.length());
                 OutputStream os = exchange.getResponseBody();
                 os.write(response.getBytes());
