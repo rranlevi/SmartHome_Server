@@ -2,7 +2,7 @@ package Classes;
 
 import java.util.List;
 
-abstract class Device {
+abstract public class Device {
     private String deviceName;
     private String description;
     private List<Info> deviceFactoryInfo;
