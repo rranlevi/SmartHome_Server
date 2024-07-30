@@ -126,7 +126,7 @@ public class Mocking {
                         "Turn the light on or off",
                         new Switch("Switch", false),
                         true,
-                        new DeviceChannel("LightChannel", "/light/setpower")
+                        new DeviceChannel("LightChannel", "/light/set_power")
                 ));
                 actionController = new DeviceActionController("Light Action Controller", "Room Light Actions", deviceActions);
                 break;
@@ -137,14 +137,14 @@ public class Mocking {
                         "Turn the AC on or off",
                         new Switch("Switch", false),
                         true,
-                        new DeviceChannel("ACChannel", "/ac/setpower")
+                        new DeviceChannel("ACChannel", "/ac/set_power")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Set Temperature",
                         "Set the AC temperature",
                         new Slider("Slider", "25", "°C"),
                         true,
-                        new DeviceChannel("ACChannel", "/ac/settemp")
+                        new DeviceChannel("ACChannel", "/ac/set_temp")
                 ));
                 actionController = new DeviceActionController("AC Action Controller", "AC Actions", deviceActions);
                 break;
@@ -155,7 +155,7 @@ public class Mocking {
                         "Set the temperature",
                         new Widget("Slider"),
                         true,
-                        new DeviceChannel("ThermostatChannel", "/thermostat/set")
+                        new DeviceChannel("ThermostatChannel", "/thermostat/set_temp")
                 ));
                 actionController = new DeviceActionController("Thermostat Action Controller", "Thermostat Actions", deviceActions);
                 break;
@@ -177,21 +177,21 @@ public class Mocking {
                         "Turn the TV on or off",
                         new Switch("Switch", false),
                         true,
-                        new DeviceChannel("TVChannel", "/tv/setpower")
+                        new DeviceChannel("TVChannel", "/tv/set_power")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Change Channel",
                         "Change the TV channel",
                         new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("HBO", "CNN", "Fox News"))),
                         true,
-                        new DeviceChannel("TVChannel", "/tv/setchannel")
+                        new DeviceChannel("TVChannel", "/tv/set_channel")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Change Volume",
                         "Change the TV volume",
                         new Slider("Slider", "10", ""),
                         true,
-                        new DeviceChannel("TVChannel", "/tv/setvolume")
+                        new DeviceChannel("TVChannel", "/tv/set_volume")
                 ));
                 actionController = new DeviceActionController("TV Action Controller", "Smart TV Actions", deviceActions);
                 break;
@@ -202,14 +202,14 @@ public class Mocking {
                         "Turn the light on or off",
                         new Switch("Switch", false),
                         true,
-                        new DeviceChannel("WashingMachineChannel", "/washingmachine/setpower")
+                        new DeviceChannel("WashingMachineChannel", "/washingmachine/set_power")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Set Cycle",
                         "Set the washing cycle",
                         new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("Short", "Medium", "Long"))),
                         true,
-                        new DeviceChannel("WashingMachineChannel", "/washingmachine/setcycle")
+                        new DeviceChannel("WashingMachineChannel", "/washingmachine/set_cycle")
                 ));
                 actionController = new DeviceActionController("Washing Machine Action Controller", "Washing Machine Actions", deviceActions);
                 break;

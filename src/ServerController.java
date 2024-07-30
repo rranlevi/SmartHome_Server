@@ -103,9 +103,14 @@ public class ServerController {
             if ("POST".equals(exchange.getRequestMethod())) {
                 // Read the request body
                 InputStreamReader reader = new InputStreamReader(exchange.getRequestBody(), StandardCharsets.UTF_8);
-                JsonObject requestBody = new Gson().fromJson(reader, JsonObject.class);
-                String newValue = requestBody.get("value").getAsString();
-
+                char[] buffer = new char[256];
+                int read = reader.read(buffer);
+                String newValue = new String(buffer, 0, read).trim();
+                if (newValue.equals("GET_DATA")) {
+                    String responseContent = getDeviceValue(channelPath);
+                    sendResponse(exchange, responseContent);
+                    return;
+                }
                 // Set the device value based on action
                 boolean updated = setDeviceValue(channelPath, newValue);
                 if (updated) {
@@ -116,12 +121,6 @@ public class ServerController {
             } else {
                 exchange.sendResponseHeaders(405, -1); // Method Not Allowed
             }
-            if ("GET".equals(exchange.getRequestMethod())) {
-                String responseContent = getDeviceValue(channelPath);
-                sendResponse(exchange, responseContent);
-            } else {
-                exchange.sendResponseHeaders(405, -1); // Method Not Allowed
-            }
         }
     }
 
@@ -129,7 +128,7 @@ public class ServerController {
         for (HouseholdDevice device : Mocking.householdDevices) {
             for (DeviceInfo info : device.getDeviceDataController().getDeviceData()) {
                 if (info.getChannel().getChannelPath().equals(channelPath)) {
-                    return new Gson().toJson(info.getDeviceInfo().getInfoValue());
+                    return info.getDeviceInfo().getInfoValue();
                 }
             }
         }

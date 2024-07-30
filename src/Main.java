@@ -27,16 +27,16 @@ public class Main {
         server.createContext("/washingmachine/status", new ServerController.DeviceChannelHandler("/washingmachine/status"));
 
         // Add POST endpoints for each device action
-        server.createContext("/light/setpower", new ServerController.PostActionHandler("/light/power"));
-        server.createContext("/ac/setpower", new ServerController.PostActionHandler("/ac/power"));
-        server.createContext("/ac/settemp", new ServerController.PostActionHandler("/ac/temperature"));
-        server.createContext("/thermostat/set", new ServerController.PostActionHandler("/thermostat/target"));
+        server.createContext("/light/set_power", new ServerController.PostActionHandler("/light/power"));
+        server.createContext("/ac/set_power", new ServerController.PostActionHandler("/ac/power"));
+        server.createContext("/ac/set_temp", new ServerController.PostActionHandler("/ac/temperature"));
+        server.createContext("/thermostat/set_temp", new ServerController.PostActionHandler("/thermostat/target"));
 //        server.createContext("/doorbell/ring", new ServerController.PostActionHandler("/doorbell/status"));
-        server.createContext("/tv/setpower", new ServerController.PostActionHandler("/tv/power"));
-        server.createContext("/tv/setchannel", new ServerController.PostActionHandler("/tv/channel"));
-        server.createContext("/tv/setvolume", new ServerController.PostActionHandler("/tv/volume"));
-        server.createContext("/washingmachine/setpower", new ServerController.PostActionHandler("/washingmachine/power"));
-        server.createContext("/washingmachine/setcycle", new ServerController.PostActionHandler("/washingmachine/cycle"));
+        server.createContext("/tv/set_power", new ServerController.PostActionHandler("/tv/power"));
+        server.createContext("/tv/set_channel", new ServerController.PostActionHandler("/tv/channel"));
+        server.createContext("/tv/set_volume", new ServerController.PostActionHandler("/tv/volume"));
+        server.createContext("/washingmachine/set_power", new ServerController.PostActionHandler("/washingmachine/power"));
+        server.createContext("/washingmachine/set_cycle", new ServerController.PostActionHandler("/washingmachine/cycle"));
 
         server.setExecutor(null); // creates a default executor
         server.start();
