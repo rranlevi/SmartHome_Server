@@ -23,8 +23,9 @@ public class Main {
 //        server.createContext("/doorbell/last", new ServerController.DeviceChannelHandler("/doorbell/last"));
         server.createContext("/tv/volume", new ServerController.DeviceChannelHandler("/tv/volume"));
         server.createContext("/tv/channel", new ServerController.DeviceChannelHandler("/tv/channel"));
+        server.createContext("/tv/power", new ServerController.DeviceChannelHandler("/tv/power"));
         server.createContext("/washingmachine/cycle", new ServerController.DeviceChannelHandler("/washingmachine/cycle"));
-        server.createContext("/washingmachine/status", new ServerController.DeviceChannelHandler("/washingmachine/status"));
+        server.createContext("/washingmachine/power", new ServerController.DeviceChannelHandler("/washingmachine/power"));
 
         // Add POST endpoints for each device action
         server.createContext("/light/set_power", new ServerController.PostActionHandler("/light/power"));
