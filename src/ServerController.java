@@ -1,4 +1,3 @@
-import com.sun.net.httpserver.HttpServer;
 import com.sun.net.httpserver.HttpHandler;
 import com.sun.net.httpserver.HttpExchange;
 import Classes.*;
@@ -7,21 +6,10 @@ import com.google.gson.GsonBuilder;
 
 import java.io.IOException;
 import java.io.OutputStream;
-import java.net.InetSocketAddress;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ServerController {
-
-    public static void main(String[] args) throws IOException {
-        HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
-        server.createContext("/api/postPath", new PostHandler());
-        server.createContext("/api/getPath", new GetHandler());
-        server.createContext("/api/getDiscDevices", new GetDevicesHandler());
-        server.setExecutor(null); // creates a default executor
-        server.start();
-        System.out.println("Server started on port 8080");
-    }
 
     static class PostHandler implements HttpHandler {
         @Override
