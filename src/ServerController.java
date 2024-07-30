@@ -72,6 +72,7 @@ public class ServerController {
             }
         }
     }
+
     static class DeviceChannelHandler implements HttpHandler {
         private final String channelPath;
 
@@ -112,6 +113,12 @@ public class ServerController {
                 } else {
                     sendResponse(exchange, "{\"message\": \"Failed to set value\"}", 500);
                 }
+            } else {
+                exchange.sendResponseHeaders(405, -1); // Method Not Allowed
+            }
+            if ("GET".equals(exchange.getRequestMethod())) {
+                String responseContent = getDeviceValue(channelPath);
+                sendResponse(exchange, responseContent);
             } else {
                 exchange.sendResponseHeaders(405, -1); // Method Not Allowed
             }

@@ -35,7 +35,7 @@ public class Main {
         server.createContext("/tv/setpower", new ServerController.PostActionHandler("/tv/power"));
         server.createContext("/tv/setchannel", new ServerController.PostActionHandler("/tv/channel"));
         server.createContext("/tv/setvolume", new ServerController.PostActionHandler("/tv/volume"));
-        server.createContext("/washingmachine/setpower", new ServerController.PostActionHandler("/washingmachine/status"));
+        server.createContext("/washingmachine/setpower", new ServerController.PostActionHandler("/washingmachine/power"));
         server.createContext("/washingmachine/setcycle", new ServerController.PostActionHandler("/washingmachine/cycle"));
 
         server.setExecutor(null); // creates a default executor

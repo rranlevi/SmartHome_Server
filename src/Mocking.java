@@ -106,7 +106,7 @@ public class Mocking {
                 break;
             case "Washing Machine":
                 deviceData.add(new DeviceInfo(new Info("Cycle", "Spin", ""), new DeviceChannel("WashingMachineChannel", "/washingmachine/cycle")));
-                deviceData.add(new DeviceInfo(new Info("Status", "Running", ""), new DeviceChannel("WashingMachineChannel", "/washingmachine/status")));
+                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("WashingMachineChannel", "/washingmachine/power")));
                 break;
             default:
                 break;
