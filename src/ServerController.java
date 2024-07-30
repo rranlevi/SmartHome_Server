@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
 
 public class ServerController {
 
@@ -66,12 +67,12 @@ public class ServerController {
         private List<HouseholdDevice> createMockDevices() {
             List<HouseholdDevice> devices = new ArrayList<>();
 
-            devices.add(new HouseholdDevice("Room Light", "Living Room", "Light Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("light.png")));
-            devices.add(new HouseholdDevice("AC", "Bedroom", "AC Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("ac.png")));
-            devices.add(new HouseholdDevice("Thermostat", "Hallway", "Thermostat Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("thermostat.png")));
-            devices.add(new HouseholdDevice("Doorbell", "Front Door", "Doorbell Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("doorbell.png")));
-            devices.add(new HouseholdDevice("Smart TV", "Living Room", "Smart TV Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("tv.png")));
-            devices.add(new HouseholdDevice("Washing Machine", "Laundry Room", "Washing Machine Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("washing-machine.png")));
+            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "Room Light", "Living Room", "Light Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("light.png")));
+            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "AC", "Bedroom", "AC Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("ac.png")));
+            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "Thermostat", "Hallway", "Thermostat Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("thermostat.png")));
+            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "Doorbell", "Front Door", "Doorbell Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("doorbell.png")));
+            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "Smart TV", "Living Room", "Smart TV Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("tv.png")));
+            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "Washing Machine", "Laundry Room", "Washing Machine Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("washing-machine.png")));
 
             return devices;
         }

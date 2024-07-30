@@ -3,6 +3,7 @@ package Classes;
 import java.util.List;
 
 abstract public class Device {
+    private String deviceId;
     private String deviceName;
     private String description;
     private List<Info> deviceFactoryInfo;
@@ -10,7 +11,13 @@ abstract public class Device {
     public String getDeviceName() {
         return deviceName;
     }
-
+    public String getDeviceId()
+    {
+        return deviceId;
+    }
+    public  void setDeviceId(String deviceId) {
+        this.deviceId = deviceId;
+    }
     public void setDeviceName(String deviceName) {
         this.deviceName = deviceName;
     }
