@@ -1,6 +1,7 @@
 import Classes.*;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class Mocking {
@@ -120,14 +121,14 @@ public class Mocking {
                 deviceActions.add(new DeviceAction(
                         "Turn On",
                         "Turn the light on",
-                        new Widget("ToggleSwitch"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("LightChannel", "/path/to/light/on")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Turn Off",
                         "Turn the light off",
-                        new Widget("ToggleSwitch"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("LightChannel", "/path/to/light/off")
                 ));
@@ -138,21 +139,21 @@ public class Mocking {
                 deviceActions.add(new DeviceAction(
                         "Turn On",
                         "Turn the AC on",
-                        new Widget("ToggleSwitch"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("ACChannel", "/path/to/ac/on")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Turn Off",
                         "Turn the AC off",
-                        new Widget("ToggleSwitch"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("ACChannel", "/path/to/ac/off")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Set Temperature",
                         "Set the AC temperature",
-                        new Widget("Slider"),
+                        new Slider("Slider", "25", "°C"),
                         true,
                         new DeviceChannel("ACChannel", "/path/to/ac/settemp")
                 ));
@@ -163,14 +164,14 @@ public class Mocking {
                 deviceActions.add(new DeviceAction(
                         "Increase Temp",
                         "Increase the temperature",
-                        new Widget("Button"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("ThermostatChannel", "/path/to/thermostat/increase")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Decrease Temp",
                         "Decrease the temperature",
-                        new Widget("Button"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("ThermostatChannel", "/path/to/thermostat/decrease")
                 ));
@@ -188,7 +189,7 @@ public class Mocking {
                 deviceActions.add(new DeviceAction(
                         "Ring",
                         "Ring the doorbell",
-                        new Widget("Button"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("DoorbellChannel", "/path/to/doorbell/ring")
                 ));
@@ -199,21 +200,21 @@ public class Mocking {
                 deviceActions.add(new DeviceAction(
                         "Turn On",
                         "Turn the TV on",
-                        new Widget("ToggleSwitch"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("TVChannel", "/path/to/tv/on")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Turn Off",
                         "Turn the TV off",
-                        new Widget("ToggleSwitch"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("TVChannel", "/path/to/tv/off")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Change Channel",
                         "Change the TV channel",
-                        new Widget("Dropdown"),
+                        new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("HBO", "CNN", "Fox News"))),
                         true,
                         new DeviceChannel("TVChannel", "/path/to/tv/channel")
                 ));
@@ -224,21 +225,21 @@ public class Mocking {
                 deviceActions.add(new DeviceAction(
                         "Start",
                         "Start the washing machine",
-                        new Widget("Button"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("WashingMachineChannel", "/path/to/washingmachine/start")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Stop",
                         "Stop the washing machine",
-                        new Widget("Button"),
+                        new Button("Button"),
                         true,
                         new DeviceChannel("WashingMachineChannel", "/path/to/washingmachine/stop")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Set Cycle",
                         "Set the washing cycle",
-                        new Widget("Dropdown"),
+                        new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("Short", "Medium", "Long"))),
                         true,
                         new DeviceChannel("WashingMachineChannel", "/path/to/washingmachine/cycle")
                 ));
