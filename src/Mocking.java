@@ -5,6 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 public class Mocking {
+    public static List<HouseholdDevice> householdDevices = createMockDevices();
+
     public static List<HouseholdDevice> createMockDevices() {
         List<HouseholdDevice> devices = new ArrayList<>();
 
@@ -82,28 +84,28 @@ public class Mocking {
         List<DeviceInfo> deviceData = new ArrayList<>();
         switch (deviceType) {
             case "Room Light":
-                deviceData.add(new DeviceInfo(new Info("Brightness", "70", "%"), new DeviceChannel("LightChannel", "/path/to/light/brightness")));
-                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("LightChannel", "/path/to/light/power")));
+                deviceData.add(new DeviceInfo(new Info("Brightness", "70", "%"), new DeviceChannel("LightChannel", "/light/brightness")));
+                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("LightChannel", "/light/power")));
                 break;
             case "AC":
-                deviceData.add(new DeviceInfo(new Info("Temperature", "24", "°C"), new DeviceChannel("ACChannel", "/path/to/ac/temperature")));
-                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("ACChannel", "/path/to/ac/power")));
+                deviceData.add(new DeviceInfo(new Info("Temperature", "24", "°C"), new DeviceChannel("ACChannel", "/ac/temperature")));
+                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("ACChannel", "/ac/power")));
                 break;
             case "Thermostat":
-                deviceData.add(new DeviceInfo(new Info("Current Temperature", "22", "°C"), new DeviceChannel("ThermostatChannel", "/path/to/thermostat/current")));
-                deviceData.add(new DeviceInfo(new Info("Target Temperature", "20", "°C"), new DeviceChannel("ThermostatChannel", "/path/to/thermostat/target")));
+                deviceData.add(new DeviceInfo(new Info("Current Temperature", "22", "°C"), new DeviceChannel("ThermostatChannel", "/thermostat/current")));
+                deviceData.add(new DeviceInfo(new Info("Target Temperature", "20", "°C"), new DeviceChannel("ThermostatChannel", "/thermostat/target")));
                 break;
             case "Doorbell":
-                deviceData.add(new DeviceInfo(new Info("Status", "Idle", ""), new DeviceChannel("DoorbellChannel", "/path/to/doorbell/status")));
-                deviceData.add(new DeviceInfo(new Info("Last Ring", "10:45 AM", ""), new DeviceChannel("DoorbellChannel", "/path/to/doorbell/last")));
+                deviceData.add(new DeviceInfo(new Info("Status", "Idle", ""), new DeviceChannel("DoorbellChannel", "/doorbell/status")));
+                deviceData.add(new DeviceInfo(new Info("Last Ring", "10:45 AM", ""), new DeviceChannel("DoorbellChannel", "/doorbell/last")));
                 break;
             case "Smart TV":
-                deviceData.add(new DeviceInfo(new Info("Volume", "15", ""), new DeviceChannel("TVChannel", "/path/to/tv/volume")));
-                deviceData.add(new DeviceInfo(new Info("Channel", "HBO", ""), new DeviceChannel("TVChannel", "/path/to/tv/channel")));
+                deviceData.add(new DeviceInfo(new Info("Volume", "15", ""), new DeviceChannel("TVChannel", "/tv/volume")));
+                deviceData.add(new DeviceInfo(new Info("Channel", "HBO", ""), new DeviceChannel("TVChannel", "/tv/channel")));
                 break;
             case "Washing Machine":
-                deviceData.add(new DeviceInfo(new Info("Cycle", "Spin", ""), new DeviceChannel("WashingMachineChannel", "/path/to/washingmachine/cycle")));
-                deviceData.add(new DeviceInfo(new Info("Status", "Running", ""), new DeviceChannel("WashingMachineChannel", "/path/to/washingmachine/status")));
+                deviceData.add(new DeviceInfo(new Info("Cycle", "Spin", ""), new DeviceChannel("WashingMachineChannel", "/washingmachine/cycle")));
+                deviceData.add(new DeviceInfo(new Info("Status", "Running", ""), new DeviceChannel("WashingMachineChannel", "/washingmachine/status")));
                 break;
             default:
                 break;
@@ -123,14 +125,14 @@ public class Mocking {
                         "Turn the light on",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("LightChannel", "/path/to/light/on")
+                        new DeviceChannel("LightChannel", "/light/on")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Turn Off",
                         "Turn the light off",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("LightChannel", "/path/to/light/off")
+                        new DeviceChannel("LightChannel", "/light/off")
                 ));
                 actionController = new DeviceActionController("Light Action Controller", "Room Light Actions", deviceActions);
                 break;
@@ -141,21 +143,21 @@ public class Mocking {
                         "Turn the AC on",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("ACChannel", "/path/to/ac/on")
+                        new DeviceChannel("ACChannel", "/ac/on")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Turn Off",
                         "Turn the AC off",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("ACChannel", "/path/to/ac/off")
+                        new DeviceChannel("ACChannel", "/ac/off")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Set Temperature",
                         "Set the AC temperature",
                         new Slider("Slider", "25", "°C"),
                         true,
-                        new DeviceChannel("ACChannel", "/path/to/ac/settemp")
+                        new DeviceChannel("ACChannel", "/ac/settemp")
                 ));
                 actionController = new DeviceActionController("AC Action Controller", "AC Actions", deviceActions);
                 break;
@@ -166,21 +168,21 @@ public class Mocking {
                         "Increase the temperature",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("ThermostatChannel", "/path/to/thermostat/increase")
+                        new DeviceChannel("ThermostatChannel", "/thermostat/increase")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Decrease Temp",
                         "Decrease the temperature",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("ThermostatChannel", "/path/to/thermostat/decrease")
+                        new DeviceChannel("ThermostatChannel", "/thermostat/decrease")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Set Temp",
                         "Set the temperature",
                         new Widget("Slider"),
                         true,
-                        new DeviceChannel("ThermostatChannel", "/path/to/thermostat/set")
+                        new DeviceChannel("ThermostatChannel", "/thermostat/set")
                 ));
                 actionController = new DeviceActionController("Thermostat Action Controller", "Thermostat Actions", deviceActions);
                 break;
@@ -191,7 +193,7 @@ public class Mocking {
                         "Ring the doorbell",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("DoorbellChannel", "/path/to/doorbell/ring")
+                        new DeviceChannel("DoorbellChannel", "/doorbell/ring")
                 ));
                 actionController = new DeviceActionController("Doorbell Action Controller", "Doorbell Actions", deviceActions);
                 break;
@@ -202,21 +204,21 @@ public class Mocking {
                         "Turn the TV on",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("TVChannel", "/path/to/tv/on")
+                        new DeviceChannel("TVChannel", "/tv/on")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Turn Off",
                         "Turn the TV off",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("TVChannel", "/path/to/tv/off")
+                        new DeviceChannel("TVChannel", "/tv/off")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Change Channel",
                         "Change the TV channel",
                         new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("HBO", "CNN", "Fox News"))),
                         true,
-                        new DeviceChannel("TVChannel", "/path/to/tv/channel")
+                        new DeviceChannel("TVChannel", "/tv/channel")
                 ));
                 actionController = new DeviceActionController("TV Action Controller", "Smart TV Actions", deviceActions);
                 break;
@@ -227,21 +229,21 @@ public class Mocking {
                         "Start the washing machine",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("WashingMachineChannel", "/path/to/washingmachine/start")
+                        new DeviceChannel("WashingMachineChannel", "/washingmachine/start")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Stop",
                         "Stop the washing machine",
                         new Button("Button"),
                         true,
-                        new DeviceChannel("WashingMachineChannel", "/path/to/washingmachine/stop")
+                        new DeviceChannel("WashingMachineChannel", "/washingmachine/stop")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Set Cycle",
                         "Set the washing cycle",
                         new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("Short", "Medium", "Long"))),
                         true,
-                        new DeviceChannel("WashingMachineChannel", "/path/to/washingmachine/cycle")
+                        new DeviceChannel("WashingMachineChannel", "/washingmachine/cycle")
                 ));
                 actionController = new DeviceActionController("Washing Machine Action Controller", "Washing Machine Actions", deviceActions);
                 break;
