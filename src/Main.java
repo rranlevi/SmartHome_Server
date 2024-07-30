@@ -10,7 +10,7 @@ public class Main {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
         // Add endpoint for fetching all devices
-        server.createContext("/devices", new ServerController.GetDevicesHandler());
+        server.createContext("/api/getDiscDevices", new ServerController.GetDevicesHandler());
 
         // Add GET endpoints for each device channel
         server.createContext("/light/brightness", new ServerController.DeviceChannelHandler("/light/brightness"));
