@@ -218,7 +218,7 @@ public class Mocking {
                         "Change the TV channel",
                         new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("HBO", "CNN", "Fox News"))),
                         true,
-                        new DeviceChannel("TVChannel", "/tv/channel")
+                        new DeviceChannel("TVChannel", "/tv/setchannel")
                 ));
                 actionController = new DeviceActionController("TV Action Controller", "Smart TV Actions", deviceActions);
                 break;
@@ -243,7 +243,7 @@ public class Mocking {
                         "Set the washing cycle",
                         new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("Short", "Medium", "Long"))),
                         true,
-                        new DeviceChannel("WashingMachineChannel", "/washingmachine/cycle")
+                        new DeviceChannel("WashingMachineChannel", "/washingmachine/setcycle")
                 ));
                 actionController = new DeviceActionController("Washing Machine Action Controller", "Washing Machine Actions", deviceActions);
                 break;

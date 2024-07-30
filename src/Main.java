@@ -38,12 +38,13 @@ public class Main {
         server.createContext("/doorbell/ring", new ServerController.PostActionHandler("/doorbell/status"));
         server.createContext("/tv/on", new ServerController.PostActionHandler("/tv/channel"));
         server.createContext("/tv/off", new ServerController.PostActionHandler("/tv/channel"));
-        server.createContext("/tv/channel", new ServerController.PostActionHandler("/tv/channel"));
+        server.createContext("/tv/setchannel", new ServerController.PostActionHandler("/tv/channel"));
         server.createContext("/washingmachine/start", new ServerController.PostActionHandler("/washingmachine/status"));
         server.createContext("/washingmachine/stop", new ServerController.PostActionHandler("/washingmachine/status"));
-        server.createContext("/washingmachine/cycle", new ServerController.PostActionHandler("/washingmachine/cycle"));
+        server.createContext("/washingmachine/setcycle", new ServerController.PostActionHandler("/washingmachine/cycle"));
 
         server.setExecutor(null); // creates a default executor
         server.start();
+        System.out.println("Server started on port 8080");
     }
 }
