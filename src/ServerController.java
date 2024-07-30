@@ -7,6 +7,7 @@ import jdk.jshell.execution.Util;
 
 import java.io.IOException;
 import java.io.OutputStream;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -48,33 +49,25 @@ public class ServerController {
         public void handle(HttpExchange exchange) throws IOException {
             if ("GET".equals(exchange.getRequestMethod())) {
                 // Create mock devices
-                List<HouseholdDevice> devices = createMockDevices();
+                List<HouseholdDevice> devices = Mocking.createMockDevices();
 
                 // Convert devices to JSON
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();
                 String jsonResponse = gson.toJson(devices);
 
+                // Calculate content length
+                byte[] jsonResponseBytes = jsonResponse.getBytes(StandardCharsets.UTF_8);
+
                 // Send JSON response
-                exchange.sendResponseHeaders(200, jsonResponse.length());
-                OutputStream os = exchange.getResponseBody();
-                os.write(jsonResponse.getBytes());
-                os.close();
+                exchange.getResponseHeaders().add("Content-Type", "application/json; charset=UTF-8");
+                exchange.sendResponseHeaders(200, jsonResponseBytes.length);
+
+                try (OutputStream os = exchange.getResponseBody()) {
+                    os.write(jsonResponseBytes);
+                }
             } else {
                 exchange.sendResponseHeaders(405, -1); // Method Not Allowed
             }
-        }
-
-        private List<HouseholdDevice> createMockDevices() {
-            List<HouseholdDevice> devices = new ArrayList<>();
-
-            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "Room Light", "Living Room", "Light Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("light.png")));
-            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "AC", "Bedroom", "AC Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("ac.png")));
-            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "Thermostat", "Hallway", "Thermostat Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("thermostat.png")));
-            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "Doorbell", "Front Door", "Doorbell Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("doorbell.png")));
-            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "Smart TV", "Living Room", "Smart TV Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("tv.png")));
-            devices.add(new HouseholdDevice(UUID.randomUUID().toString(), "Washing Machine", "Laundry Room", "Washing Machine Description", new DeviceDataController(), new DeviceActionController(), Utils.encodeImageToBase64("washing-machine.png")));
-
-            return devices;
         }
     }
 }
