@@ -19,28 +19,23 @@ public class Main {
         server.createContext("/ac/power", new ServerController.DeviceChannelHandler("/ac/power"));
         server.createContext("/thermostat/current", new ServerController.DeviceChannelHandler("/thermostat/current"));
         server.createContext("/thermostat/target", new ServerController.DeviceChannelHandler("/thermostat/target"));
-        server.createContext("/doorbell/status", new ServerController.DeviceChannelHandler("/doorbell/status"));
-        server.createContext("/doorbell/last", new ServerController.DeviceChannelHandler("/doorbell/last"));
+//        server.createContext("/doorbell/status", new ServerController.DeviceChannelHandler("/doorbell/status"));
+//        server.createContext("/doorbell/last", new ServerController.DeviceChannelHandler("/doorbell/last"));
         server.createContext("/tv/volume", new ServerController.DeviceChannelHandler("/tv/volume"));
         server.createContext("/tv/channel", new ServerController.DeviceChannelHandler("/tv/channel"));
         server.createContext("/washingmachine/cycle", new ServerController.DeviceChannelHandler("/washingmachine/cycle"));
         server.createContext("/washingmachine/status", new ServerController.DeviceChannelHandler("/washingmachine/status"));
 
         // Add POST endpoints for each device action
-        server.createContext("/light/on", new ServerController.PostActionHandler("/light/power"));
-        server.createContext("/light/off", new ServerController.PostActionHandler("/light/power"));
-        server.createContext("/ac/on", new ServerController.PostActionHandler("/ac/power"));
-        server.createContext("/ac/off", new ServerController.PostActionHandler("/ac/power"));
+        server.createContext("/light/setpower", new ServerController.PostActionHandler("/light/power"));
+        server.createContext("/ac/setpower", new ServerController.PostActionHandler("/ac/power"));
         server.createContext("/ac/settemp", new ServerController.PostActionHandler("/ac/temperature"));
-        server.createContext("/thermostat/increase", new ServerController.PostActionHandler("/thermostat/target"));
-        server.createContext("/thermostat/decrease", new ServerController.PostActionHandler("/thermostat/target"));
         server.createContext("/thermostat/set", new ServerController.PostActionHandler("/thermostat/target"));
-        server.createContext("/doorbell/ring", new ServerController.PostActionHandler("/doorbell/status"));
-        server.createContext("/tv/on", new ServerController.PostActionHandler("/tv/channel"));
-        server.createContext("/tv/off", new ServerController.PostActionHandler("/tv/channel"));
+//        server.createContext("/doorbell/ring", new ServerController.PostActionHandler("/doorbell/status"));
+        server.createContext("/tv/setpower", new ServerController.PostActionHandler("/tv/power"));
         server.createContext("/tv/setchannel", new ServerController.PostActionHandler("/tv/channel"));
-        server.createContext("/washingmachine/start", new ServerController.PostActionHandler("/washingmachine/status"));
-        server.createContext("/washingmachine/stop", new ServerController.PostActionHandler("/washingmachine/status"));
+        server.createContext("/tv/setvolume", new ServerController.PostActionHandler("/tv/volume"));
+        server.createContext("/washingmachine/setpower", new ServerController.PostActionHandler("/washingmachine/status"));
         server.createContext("/washingmachine/setcycle", new ServerController.PostActionHandler("/washingmachine/cycle"));
 
         server.setExecutor(null); // creates a default executor

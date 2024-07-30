@@ -100,6 +100,7 @@ public class Mocking {
                 deviceData.add(new DeviceInfo(new Info("Last Ring", "10:45 AM", ""), new DeviceChannel("DoorbellChannel", "/doorbell/last")));
                 break;
             case "Smart TV":
+                deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("TVChannel", "/tv/power")));
                 deviceData.add(new DeviceInfo(new Info("Volume", "15", ""), new DeviceChannel("TVChannel", "/tv/volume")));
                 deviceData.add(new DeviceInfo(new Info("Channel", "HBO", ""), new DeviceChannel("TVChannel", "/tv/channel")));
                 break;
@@ -121,36 +122,22 @@ public class Mocking {
         switch (deviceType) {
             case "Room Light":
                 deviceActions.add(new DeviceAction(
-                        "Turn On",
-                        "Turn the light on",
-                        new Button("Button"),
+                        "Power",
+                        "Turn the light on or off",
+                        new Switch("Switch", false),
                         true,
-                        new DeviceChannel("LightChannel", "/light/on")
-                ));
-                deviceActions.add(new DeviceAction(
-                        "Turn Off",
-                        "Turn the light off",
-                        new Button("Button"),
-                        true,
-                        new DeviceChannel("LightChannel", "/light/off")
+                        new DeviceChannel("LightChannel", "/light/setpower")
                 ));
                 actionController = new DeviceActionController("Light Action Controller", "Room Light Actions", deviceActions);
                 break;
 
             case "AC":
                 deviceActions.add(new DeviceAction(
-                        "Turn On",
-                        "Turn the AC on",
-                        new Button("Button"),
+                        "Power",
+                        "Turn the AC on or off",
+                        new Switch("Switch", false),
                         true,
-                        new DeviceChannel("ACChannel", "/ac/on")
-                ));
-                deviceActions.add(new DeviceAction(
-                        "Turn Off",
-                        "Turn the AC off",
-                        new Button("Button"),
-                        true,
-                        new DeviceChannel("ACChannel", "/ac/off")
+                        new DeviceChannel("ACChannel", "/ac/setpower")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Set Temperature",
@@ -164,20 +151,6 @@ public class Mocking {
 
             case "Thermostat":
                 deviceActions.add(new DeviceAction(
-                        "Increase Temp",
-                        "Increase the temperature",
-                        new Button("Button"),
-                        true,
-                        new DeviceChannel("ThermostatChannel", "/thermostat/increase")
-                ));
-                deviceActions.add(new DeviceAction(
-                        "Decrease Temp",
-                        "Decrease the temperature",
-                        new Button("Button"),
-                        true,
-                        new DeviceChannel("ThermostatChannel", "/thermostat/decrease")
-                ));
-                deviceActions.add(new DeviceAction(
                         "Set Temp",
                         "Set the temperature",
                         new Widget("Slider"),
@@ -188,30 +161,23 @@ public class Mocking {
                 break;
 
             case "Doorbell":
-                deviceActions.add(new DeviceAction(
-                        "Ring",
-                        "Ring the doorbell",
-                        new Button("Button"),
-                        true,
-                        new DeviceChannel("DoorbellChannel", "/doorbell/ring")
-                ));
+//                deviceActions.add(new DeviceAction(
+//                        "Ring",
+//                        "Ring the doorbell",
+//                        new Switch("Button","NotImplemented"),
+//                        true,
+//                        new DeviceChannel("DoorbellChannel", "/doorbell/ring")
+//                ));
                 actionController = new DeviceActionController("Doorbell Action Controller", "Doorbell Actions", deviceActions);
                 break;
 
             case "Smart TV":
                 deviceActions.add(new DeviceAction(
-                        "Turn On",
-                        "Turn the TV on",
-                        new Button("Button"),
+                        "Power",
+                        "Turn the TV on or off",
+                        new Switch("Switch", false),
                         true,
-                        new DeviceChannel("TVChannel", "/tv/on")
-                ));
-                deviceActions.add(new DeviceAction(
-                        "Turn Off",
-                        "Turn the TV off",
-                        new Button("Button"),
-                        true,
-                        new DeviceChannel("TVChannel", "/tv/off")
+                        new DeviceChannel("TVChannel", "/tv/setpower")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Change Channel",
@@ -220,23 +186,23 @@ public class Mocking {
                         true,
                         new DeviceChannel("TVChannel", "/tv/setchannel")
                 ));
+                deviceActions.add(new DeviceAction(
+                        "Change Volume",
+                        "Change the TV volume",
+                        new Slider("Slider", "10", ""),
+                        true,
+                        new DeviceChannel("TVChannel", "/tv/setvolume")
+                ));
                 actionController = new DeviceActionController("TV Action Controller", "Smart TV Actions", deviceActions);
                 break;
 
             case "Washing Machine":
                 deviceActions.add(new DeviceAction(
-                        "Start",
-                        "Start the washing machine",
-                        new Button("Button"),
+                        "Power",
+                        "Turn the light on or off",
+                        new Switch("Switch", false),
                         true,
-                        new DeviceChannel("WashingMachineChannel", "/washingmachine/start")
-                ));
-                deviceActions.add(new DeviceAction(
-                        "Stop",
-                        "Stop the washing machine",
-                        new Button("Button"),
-                        true,
-                        new DeviceChannel("WashingMachineChannel", "/washingmachine/stop")
+                        new DeviceChannel("WashingMachineChannel", "/washingmachine/setpower")
                 ));
                 deviceActions.add(new DeviceAction(
                         "Set Cycle",
