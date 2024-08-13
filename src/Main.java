@@ -1,7 +1,11 @@
+import Classes.DeviceAction;
+import Classes.DeviceInfo;
+import Classes.HouseholdDevice;
 import com.sun.net.httpserver.HttpServer;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.util.List;
 import java.util.Random;
 
 public class Main {
@@ -9,35 +13,20 @@ public class Main {
     public static void main(String[] args) throws IOException {
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
+        List<HouseholdDevice> devices = Mocking.householdDevices;
+
         // Add endpoint for fetching all devices
-        server.createContext("/api/getDiscDevices", new ServerController.GetDevicesHandler());
-
-        // Add GET endpoints for each device channel
-        server.createContext("/light/brightness", new ServerController.DeviceChannelHandler("/light/brightness"));
-        server.createContext("/light/power", new ServerController.DeviceChannelHandler("/light/power"));
-        server.createContext("/ac/temperature", new ServerController.DeviceChannelHandler("/ac/temperature"));
-        server.createContext("/ac/power", new ServerController.DeviceChannelHandler("/ac/power"));
-        server.createContext("/thermostat/current", new ServerController.DeviceChannelHandler("/thermostat/current"));
-        server.createContext("/thermostat/target", new ServerController.DeviceChannelHandler("/thermostat/target"));
-//        server.createContext("/doorbell/status", new ServerController.DeviceChannelHandler("/doorbell/status"));
-//        server.createContext("/doorbell/last", new ServerController.DeviceChannelHandler("/doorbell/last"));
-        server.createContext("/tv/volume", new ServerController.DeviceChannelHandler("/tv/volume"));
-        server.createContext("/tv/channel", new ServerController.DeviceChannelHandler("/tv/channel"));
-        server.createContext("/tv/power", new ServerController.DeviceChannelHandler("/tv/power"));
-        server.createContext("/washingmachine/cycle", new ServerController.DeviceChannelHandler("/washingmachine/cycle"));
-        server.createContext("/washingmachine/power", new ServerController.DeviceChannelHandler("/washingmachine/power"));
-
-        // Add POST endpoints for each device action
-        server.createContext("/light/set_power", new ServerController.PostActionHandler("/light/power"));
-        server.createContext("/ac/set_power", new ServerController.PostActionHandler("/ac/power"));
-        server.createContext("/ac/set_temp", new ServerController.PostActionHandler("/ac/temperature"));
-        server.createContext("/thermostat/set_temp", new ServerController.PostActionHandler("/thermostat/target"));
-//        server.createContext("/doorbell/ring", new ServerController.PostActionHandler("/doorbell/status"));
-        server.createContext("/tv/set_power", new ServerController.PostActionHandler("/tv/power"));
-        server.createContext("/tv/set_channel", new ServerController.PostActionHandler("/tv/channel"));
-        server.createContext("/tv/set_volume", new ServerController.PostActionHandler("/tv/volume"));
-        server.createContext("/washingmachine/set_power", new ServerController.PostActionHandler("/washingmachine/power"));
-        server.createContext("/washingmachine/set_cycle", new ServerController.PostActionHandler("/washingmachine/cycle"));
+        server.createContext("/api/getDiscDevices", new ServerController.GetDevicesHandler(devices));
+        for (HouseholdDevice device : devices) {
+            // Add GET endpoints for each device channel
+            for (DeviceInfo info : device.getDeviceDataController().getDeviceData()) {
+                server.createContext(info.getChannel().getChannelPath(), new ServerController.DeviceChannelHandler(info.getChannel().getChannelPath()));
+            }
+            // Add POST endpoints for each device action
+            for (DeviceAction action : device.getDeviceActionController().getDeviceActions()) {
+                server.createContext(action.getActionChannel().getChannelPath(), new ServerController.PostActionHandler(action.getDataChannel().getChannelPath()));
+            }
+        }
 
         server.setExecutor(null); // creates a default executor
         server.start();

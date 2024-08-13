@@ -47,11 +47,15 @@ public class ServerController {
 //    }
 
     static class GetDevicesHandler implements HttpHandler {
+        private final List<HouseholdDevice> devices;
+
+        public GetDevicesHandler(List<HouseholdDevice> devices) {
+            this.devices = devices;
+        }
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             if ("GET".equals(exchange.getRequestMethod())) {
                 // Create mock devices
-                List<HouseholdDevice> devices = Mocking.householdDevices;
 
                 // Convert devices to JSON
                 Gson gson = new GsonBuilder().setPrettyPrinting().create();

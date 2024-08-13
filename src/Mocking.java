@@ -3,75 +3,81 @@ import Classes.*;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Optional;
 
 public class Mocking {
     public static List<HouseholdDevice> householdDevices = createMockDevices();
 
     public static List<HouseholdDevice> createMockDevices() {
         List<HouseholdDevice> devices = new ArrayList<>();
-
+        DeviceDataController mockDeviceDataController = createSpecialDeviceDataController("Room Light");
         devices.add(new HouseholdDevice(
                 "1",
                 "Room Light",
                 "Living Room",
                 "Light Description",
-                createSpecialDeviceDataController("Room Light"),
-                createSpecialDeviceActionController("Room Light"),
+                mockDeviceDataController,
+                createSpecialDeviceActionController("Room Light", mockDeviceDataController),
                 Utils.encodeImageToBase64("light.png"),
                 createMockDeviceFactoryInfo("Room Light")
         ));
 
+        mockDeviceDataController = createSpecialDeviceDataController("AC");
         devices.add(new HouseholdDevice(
                 "2",
                 "AC",
                 "Bedroom",
                 "AC Description",
-                createSpecialDeviceDataController("AC"),
-                createSpecialDeviceActionController("AC"),
+                mockDeviceDataController,
+                createSpecialDeviceActionController("AC", mockDeviceDataController),
                 Utils.encodeImageToBase64("ac.png"),
                 createMockDeviceFactoryInfo("AC")
         ));
 
+        mockDeviceDataController = createSpecialDeviceDataController("Thermostat");
         devices.add(new HouseholdDevice(
                 "3",
                 "Thermostat",
                 "Hallway",
                 "Thermostat Description",
                 createSpecialDeviceDataController("Thermostat"),
-                createSpecialDeviceActionController("Thermostat"),
+                createSpecialDeviceActionController("Thermostat", mockDeviceDataController),
                 Utils.encodeImageToBase64("thermostat.png"),
                 createMockDeviceFactoryInfo("Thermostat")
         ));
 
+        mockDeviceDataController = createSpecialDeviceDataController("Doorbell");
         devices.add(new HouseholdDevice(
                 "4",
                 "Doorbell",
                 "Front Door",
                 "Doorbell Description",
                 createSpecialDeviceDataController("Doorbell"),
-                createSpecialDeviceActionController("Doorbell"),
+                createSpecialDeviceActionController("Doorbell", mockDeviceDataController),
                 Utils.encodeImageToBase64("doorbell.png"),
                 createMockDeviceFactoryInfo("Doorbell")
         ));
 
+        mockDeviceDataController = createSpecialDeviceDataController("Smart TV");
         devices.add(new HouseholdDevice(
                 "5",
                 "Smart TV",
                 "Living Room",
                 "Smart TV Description",
                 createSpecialDeviceDataController("Smart TV"),
-                createSpecialDeviceActionController("Smart TV"),
+                createSpecialDeviceActionController("Smart TV", mockDeviceDataController),
                 Utils.encodeImageToBase64("tv.png"),
                 createMockDeviceFactoryInfo("Smart TV")
         ));
 
+        mockDeviceDataController = createSpecialDeviceDataController("Washing Machine");
         devices.add(new HouseholdDevice(
                 "6",
                 "Washing Machine",
                 "Laundry Room",
                 "Washing Machine Description",
                 createSpecialDeviceDataController("Washing Machine"),
-                createSpecialDeviceActionController("Washing Machine"),
+                createSpecialDeviceActionController("Washing Machine", mockDeviceDataController),
                 Utils.encodeImageToBase64("washing-machine.png"),
                 createMockDeviceFactoryInfo("Washing Machine")
         ));
@@ -84,29 +90,29 @@ public class Mocking {
         List<DeviceInfo> deviceData = new ArrayList<>();
         switch (deviceType) {
             case "Room Light":
-                deviceData.add(new DeviceInfo(new Info("Brightness", "70", "%"), new DeviceChannel("LightChannel", "/light/brightness")));
-                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("LightChannel", "/light/power")));
+                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("LightChannelPower", "/light/power")));
+                deviceData.add(new DeviceInfo(new Info("Brightness", "70", "%"), new DeviceChannel("LightChannelBrightness", "/light/brightness")));
                 break;
             case "AC":
-                deviceData.add(new DeviceInfo(new Info("Temperature", "24", "°C"), new DeviceChannel("ACChannel", "/ac/temperature")));
-                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("ACChannel", "/ac/power")));
+                deviceData.add(new DeviceInfo(new Info("Temperature", "24", "°C"), new DeviceChannel("ACChannelTemp", "/ac/temperature")));
+                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("ACChannelPower", "/ac/power")));
                 break;
             case "Thermostat":
-                deviceData.add(new DeviceInfo(new Info("Current Temperature", "22", "°C"), new DeviceChannel("ThermostatChannel", "/thermostat/current")));
-                deviceData.add(new DeviceInfo(new Info("Target Temperature", "20", "°C"), new DeviceChannel("ThermostatChannel", "/thermostat/target")));
+                deviceData.add(new DeviceInfo(new Info("Current Temperature", "22", "°C"), new DeviceChannel("ThermostatChannelCurrent", "/thermostat/current")));
+                deviceData.add(new DeviceInfo(new Info("Target Temperature", "20", "°C"), new DeviceChannel("ThermostatChannelTarget", "/thermostat/target")));
                 break;
             case "Doorbell":
-                deviceData.add(new DeviceInfo(new Info("Status", "Idle", ""), new DeviceChannel("DoorbellChannel", "/doorbell/status")));
-                deviceData.add(new DeviceInfo(new Info("Last Ring", "10:45 AM", ""), new DeviceChannel("DoorbellChannel", "/doorbell/last")));
+                deviceData.add(new DeviceInfo(new Info("Status", "Idle", ""), new DeviceChannel("DoorbellChannelStatus", "/doorbell/status")));
+                deviceData.add(new DeviceInfo(new Info("Last Ring", "10:45 AM", ""), new DeviceChannel("DoorbellChannelLast", "/doorbell/last")));
                 break;
             case "Smart TV":
-                deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("TVChannel", "/tv/power")));
-                deviceData.add(new DeviceInfo(new Info("Volume", "15", ""), new DeviceChannel("TVChannel", "/tv/volume")));
-                deviceData.add(new DeviceInfo(new Info("Channel", "HBO", ""), new DeviceChannel("TVChannel", "/tv/channel")));
+                deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("TVChannelPower", "/tv/power")));
+                deviceData.add(new DeviceInfo(new Info("Volume", "15", ""), new DeviceChannel("TVChannelVolume", "/tv/volume")));
+                deviceData.add(new DeviceInfo(new Info("Channel", "HBO", ""), new DeviceChannel("TVChannelChannel", "/tv/channel")));
                 break;
             case "Washing Machine":
-                deviceData.add(new DeviceInfo(new Info("Cycle", "Spin", ""), new DeviceChannel("WashingMachineChannel", "/washingmachine/cycle")));
-                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("WashingMachineChannel", "/washingmachine/power")));
+                deviceData.add(new DeviceInfo(new Info("Cycle", "Spin", ""), new DeviceChannel("WashingMachineChannelCycle", "/washingmachine/cycle")));
+                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("WashingMachineChannelPower", "/washingmachine/power")));
                 break;
             default:
                 break;
@@ -115,48 +121,77 @@ public class Mocking {
         return new DeviceDataController(deviceType + " Data Controller", deviceType + " Data Description", deviceData);
     }
 
-    private static DeviceActionController createSpecialDeviceActionController(String deviceType) {
+    private static DeviceActionController createSpecialDeviceActionController(String deviceType, DeviceDataController mockDeviceDataController) {
+        //Name of the action channel must be set by the name of the data channel - if we want it to be sync
+
         List<DeviceAction> deviceActions = new ArrayList<>();
         DeviceActionController actionController;
-
+        Optional<DeviceInfo> info;
         switch (deviceType) {
             case "Room Light":
-                deviceActions.add(new DeviceAction(
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("LightChannelPower"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Power",
                         "Turn the light on or off",
                         new Switch("Switch", false),
                         true,
-                        new DeviceChannel("LightChannel", "/light/set_power")
-                ));
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/light/set_power"),
+                        deviceInfo.getChannel()
+                )));
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("LightChannelBrightness"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
+                        "Brightness",
+                        "Turn the brightness up or down",
+                        new Slider("Slider", "0", ""),
+                        true,
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/light/set_brightness"),
+                        deviceInfo.getChannel()
+                )));
                 actionController = new DeviceActionController("Light Action Controller", "Room Light Actions", deviceActions);
                 break;
 
             case "AC":
-                deviceActions.add(new DeviceAction(
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("ACChannelPower"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Power",
                         "Turn the AC on or off",
                         new Switch("Switch", false),
                         true,
-                        new DeviceChannel("ACChannel", "/ac/set_power")
-                ));
-                deviceActions.add(new DeviceAction(
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/ac/set_power"),
+                        deviceInfo.getChannel()
+                )));
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("ACChannelTemp"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Set Temperature",
-                        "Set the AC temperature",
+                        "Turn the temperature up or down",
                         new Slider("Slider", "25", "°C"),
                         true,
-                        new DeviceChannel("ACChannel", "/ac/set_temp")
-                ));
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/ac/set_temp"),
+                        deviceInfo.getChannel()
+                )));
                 actionController = new DeviceActionController("AC Action Controller", "AC Actions", deviceActions);
                 break;
 
             case "Thermostat":
-                deviceActions.add(new DeviceAction(
-                        "Set Temp",
-                        "Set the temperature",
-                        new Widget("Slider"),
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("ThermostatChannelTarget"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
+                        "Set Target Temp",
+                        "Set the target temperature",
+                        new Slider("Slider", "25", "°C"),
                         true,
-                        new DeviceChannel("ThermostatChannel", "/thermostat/set_temp")
-                ));
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/thermostat/set_temp"),
+                        deviceInfo.getChannel()
+                )));
                 actionController = new DeviceActionController("Thermostat Action Controller", "Thermostat Actions", deviceActions);
                 break;
 
@@ -172,45 +207,68 @@ public class Mocking {
                 break;
 
             case "Smart TV":
-                deviceActions.add(new DeviceAction(
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("TVChannelPower"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Power",
                         "Turn the TV on or off",
                         new Switch("Switch", false),
                         true,
-                        new DeviceChannel("TVChannel", "/tv/set_power")
-                ));
-                deviceActions.add(new DeviceAction(
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/tv/set_power"),
+                        deviceInfo.getChannel()
+                )));
+
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("TVChannelChannel"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Change Channel",
                         "Change the TV channel",
                         new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("HBO", "CNN", "Fox News"))),
                         true,
-                        new DeviceChannel("TVChannel", "/tv/set_channel")
-                ));
-                deviceActions.add(new DeviceAction(
-                        "Change Volume",
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/tv/set_channel"),
+                        deviceInfo.getChannel()
+                )));
+
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("TVChannelVolume"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Change the TV volume",
+                        "Change the TV channel",
                         new Slider("Slider", "10", ""),
                         true,
-                        new DeviceChannel("TVChannel", "/tv/set_volume")
-                ));
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/tv/set_volume"),
+                        deviceInfo.getChannel()
+                )));
                 actionController = new DeviceActionController("TV Action Controller", "Smart TV Actions", deviceActions);
                 break;
 
             case "Washing Machine":
-                deviceActions.add(new DeviceAction(
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("WashingMachineChannelPower"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Power",
-                        "Turn the light on or off",
+                        "Turn the Washing Machine on or off",
                         new Switch("Switch", false),
                         true,
-                        new DeviceChannel("WashingMachineChannel", "/washingmachine/set_power")
-                ));
-                deviceActions.add(new DeviceAction(
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/washingmachine/set_power"),
+                        deviceInfo.getChannel()
+                )));
+
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("WashingMachineChannelCycle"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Set Cycle",
                         "Set the washing cycle",
                         new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("Short", "Medium", "Long"))),
                         true,
-                        new DeviceChannel("WashingMachineChannel", "/washingmachine/set_cycle")
-                ));
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/washingmachine/set_cycle"),
+                        deviceInfo.getChannel()
+                )));
                 actionController = new DeviceActionController("Washing Machine Action Controller", "Washing Machine Actions", deviceActions);
                 break;
 
