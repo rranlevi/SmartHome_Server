@@ -6,45 +6,14 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import jdk.jshell.execution.Util;
 
+import java.util.*;
+
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.UUID;
 
 public class ServerController {
-
-//    static class PostHandler implements HttpHandler {
-//        @Override
-//        public void handle(HttpExchange exchange) throws IOException {
-//            if ("POST".equals(exchange.getRequestMethod())) {
-//                String response = "{\"message\": \"Hello, this is a POST response!\"}";
-//                exchange.sendResponseHeaders(200, response.length());
-//                OutputStream os = exchange.getResponseBody();
-//                os.write(response.getBytes());
-//                os.close();
-//            } else {
-//                exchange.sendResponseHeaders(405, -1); // Method Not Allowed
-//            }
-//        }
-//    }
-//
-//    static class GetHandler implements HttpHandler {
-//        @Override
-//        public void handle(HttpExchange exchange) throws IOException {
-//            if ("GET".equals(exchange.getRequestMethod())) {
-//                String response = "{\"message\": \"Hello, this is a GET response!\"}";
-//                exchange.sendResponseHeaders(200, response.length());
-//                OutputStream os = exchange.getResponseBody();
-//                os.write(response.getBytes());
-//                os.close();
-//            } else {
-//                exchange.sendResponseHeaders(405, -1); // Method Not Allowed
-//            }
-//        }
-//    }
 
     static class GetDevicesHandler implements HttpHandler {
         private final List<HouseholdDevice> devices;
@@ -52,6 +21,7 @@ public class ServerController {
         public GetDevicesHandler(List<HouseholdDevice> devices) {
             this.devices = devices;
         }
+
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             if ("GET".equals(exchange.getRequestMethod())) {
@@ -110,11 +80,6 @@ public class ServerController {
                 char[] buffer = new char[256];
                 int read = reader.read(buffer);
                 String newValue = new String(buffer, 0, read).trim();
-                if (newValue.equals("GET_DATA")) {
-                    String responseContent = getDeviceValue(channelPath);
-                    sendResponse(exchange, responseContent);
-                    return;
-                }
                 // Set the device value based on action
                 boolean updated = setDeviceValue(channelPath, newValue);
                 if (updated) {
@@ -132,6 +97,15 @@ public class ServerController {
         for (HouseholdDevice device : Mocking.householdDevices) {
             for (DeviceInfo info : device.getDeviceDataController().getDeviceData()) {
                 if (info.getChannel().getChannelPath().equals(channelPath)) {
+                    if (channelPath.equals("/thermostat/current")) { //this if statement is only for mocking
+                        Optional<DeviceInfo> mockData = device.getDeviceDataController().getDeviceData().stream()
+                                .filter(mockDevice -> mockDevice.getChannel().getChannelName().equals("ThermostatChannelTarget"))
+                                .findFirst();
+                        if (mockData.isPresent()) {
+                            Random random = new Random();
+                            return info.getDeviceInfo().getInfoValue() + random.nextDouble(0.1, Double.parseDouble(mockData.get().getDeviceInfo().getInfoValue()));
+                        }
+                    }
                     return info.getDeviceInfo().getInfoValue();
                 }
             }
