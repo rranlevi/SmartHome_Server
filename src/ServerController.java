@@ -103,7 +103,9 @@ public class ServerController {
                                 .findFirst();
                         if (mockData.isPresent()) {
                             Random random = new Random();
-                            return Double.toString(Double.parseDouble(info.getDeviceInfo().getInfoValue()) + random.nextDouble(0.1, Double.parseDouble(mockData.get().getDeviceInfo().getInfoValue()) / 1.5 * Double.parseDouble(mockData.get().getDeviceInfo().getInfoValue())));
+                            int currentTemp = Integer.parseInt(info.getDeviceInfo().getInfoValue());
+                            int targetTemp = Integer.parseInt(mockData.get().getDeviceInfo().getInfoValue());
+                            return Integer.toString(currentTemp + random.nextInt(0, (targetTemp - currentTemp) / 2));
                         }
                     }
                     return info.getDeviceInfo().getInfoValue();
