@@ -111,7 +111,7 @@ public class Mocking {
                 deviceData.add(new DeviceInfo(new Info("Channel", "HBO", ""), new DeviceChannel("TVChannelChannel", "/tv/channel")));
                 break;
             case "Washing Machine":
-                deviceData.add(new DeviceInfo(new Info("Cycle", "Spin", ""), new DeviceChannel("WashingMachineChannelCycle", "/washingmachine/cycle")));
+                deviceData.add(new DeviceInfo(new Info("Cycle", "Medium", ""), new DeviceChannel("WashingMachineChannelCycle", "/washingmachine/cycle")));
                 deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("WashingMachineChannelPower", "/washingmachine/power")));
                 break;
             default:
