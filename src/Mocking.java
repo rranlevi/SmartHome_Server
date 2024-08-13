@@ -90,12 +90,12 @@ public class Mocking {
         List<DeviceInfo> deviceData = new ArrayList<>();
         switch (deviceType) {
             case "Room Light":
-                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("LightChannelPower", "/light/power")));
+                deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("LightChannelPower", "/light/power")));
                 deviceData.add(new DeviceInfo(new Info("Brightness", "70", "%"), new DeviceChannel("LightChannelBrightness", "/light/brightness")));
                 break;
             case "AC":
                 deviceData.add(new DeviceInfo(new Info("Temperature", "24", "°C"), new DeviceChannel("ACChannelTemp", "/ac/temperature")));
-                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("ACChannelPower", "/ac/power")));
+                deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("ACChannelPower", "/ac/power")));
                 break;
             case "Thermostat":
                 deviceData.add(new DeviceInfo(new Info("Current Temperature", "22", "°C"), new DeviceChannel("ThermostatChannelCurrent", "/thermostat/current")));
@@ -112,7 +112,7 @@ public class Mocking {
                 break;
             case "Washing Machine":
                 deviceData.add(new DeviceInfo(new Info("Cycle", "Medium", ""), new DeviceChannel("WashingMachineChannelCycle", "/washingmachine/cycle")));
-                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("WashingMachineChannelPower", "/washingmachine/power")));
+                deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("WashingMachineChannelPower", "/washingmachine/power")));
                 break;
             default:
                 break;
