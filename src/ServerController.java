@@ -97,8 +97,7 @@ public class ServerController {
                         return;
                     }
                     int frameNum = Integer.parseInt(cameraStream.getCurrentFrameNum());
-                    String videoPath = "Camera_Streams/camera_stream.mp4";
-                    newValue = Utils.processFrameFromVideo(frameNum, videoPath);
+                    newValue = Utils.processFrameFromVideo(frameNum);
                 }
 
                 // Set the device value based on action

@@ -186,7 +186,7 @@ public class Mocking {
                 info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Camera Frame",
                         "Gets the camera frame",
-                        new CameraStream("CameraStream"),
+                        new CameraStream("CameraStream", Utils.processFrameFromVideo(0)),
                         true,
                         new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/camera/next_frame"),
                         deviceInfo.getChannel()

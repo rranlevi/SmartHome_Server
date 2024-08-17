@@ -8,6 +8,7 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 public class Utils {
+    public static final String videoPath = "Camera_Streams/camera_stream.mp4";
     // Method to encode image to Base64
     public static String encodeImageToBase64(String imagePath) {
         imagePath = "Devices_Images/" + imagePath;
@@ -34,7 +35,8 @@ public class Utils {
         }
     }
 
-    public static String processFrameFromVideo(int frameNum, String videoPath) {
+    public static String processFrameFromVideo(int frameNum) {
+        String videoPath = Utils.videoPath;
         File videoFile = new File(videoPath);
 
         if (!videoFile.exists()) {
