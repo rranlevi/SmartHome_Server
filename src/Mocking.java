@@ -75,7 +75,7 @@ public class Mocking {
                 "6",
                 "Washing Machine",
                 "Laundry Room",
-                "A high-efficiency washing machine with multiple wash cycles and remote start.",
+                "A washing machine with multiple wash cycles and remote start.",
                 createSpecialDeviceDataController("Washing Machine"),
                 createSpecialDeviceActionController("Washing Machine", mockDeviceDataController),
                 Utils.encodeImageToBase64("washing-machine.png"),
