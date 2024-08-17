@@ -75,11 +75,31 @@ public class ServerController {
         @Override
         public void handle(HttpExchange exchange) throws IOException {
             if ("POST".equals(exchange.getRequestMethod())) {
+
                 // Read the request body
                 InputStreamReader reader = new InputStreamReader(exchange.getRequestBody(), StandardCharsets.UTF_8);
                 char[] buffer = new char[256];
                 int read = reader.read(buffer);
                 String newValue = new String(buffer, 0, read).trim();
+
+                if (this.channelPath.equals("/camera/next_frame")) {
+                    CameraStream cameraStream = null;
+
+                    for (HouseholdDevice device : Mocking.householdDevices) {
+                        for (DeviceAction action : device.getDeviceActionController().getDeviceActions()) {
+                            if (action.getDataChannel().getChannelPath().equals(channelPath)) {
+                                cameraStream = (CameraStream) action.getWidget();
+                            }
+                        }
+                    }
+                    if (cameraStream == null){
+                        return;
+                    }
+                    int frameNum = Integer.parseInt(cameraStream.getCurrentFrameNum());
+                    String videoPath = "Camera_Streams/camera_stream.mp4";
+                    newValue = Utils.processFrameFromVideo(frameNum, videoPath);
+                }
+
                 // Set the device value based on action
                 boolean updated = setDeviceValue(channelPath, newValue);
                 if (updated) {

@@ -97,9 +97,8 @@ public class Mocking {
                 deviceData.add(new DeviceInfo(new Info("Temperature", "24", "°C"), new DeviceChannel("ACChannelTemp", "/ac/temperature")));
                 deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("ACChannelPower", "/ac/power")));
                 break;
-            case "Thermostat":
-                deviceData.add(new DeviceInfo(new Info("Current Temperature", "22", "°C"), new DeviceChannel("ThermostatChannelCurrent", "/thermostat/current")));
-                deviceData.add(new DeviceInfo(new Info("Target Temperature", "20", "°C"), new DeviceChannel("ThermostatChannelTarget", "/thermostat/target")));
+            case "Camera":
+                deviceData.add(new DeviceInfo(new Info("Current Frame", "", ""), new DeviceChannel("CameraChannelFrame", "/camera/frame")));
                 break;
             case "Doorbell":
                 deviceData.add(new DeviceInfo(new Info("Status", "Idle", ""), new DeviceChannel("DoorbellChannelStatus", "/doorbell/status")));
@@ -180,19 +179,19 @@ public class Mocking {
                 actionController = new DeviceActionController("AC Action Controller", "AC Actions", deviceActions);
                 break;
 
-            case "Thermostat":
+            case "Camera":
                 info = mockDeviceDataController.getDeviceData().stream()
-                        .filter(device -> device.getChannel().getChannelName().equals("ThermostatChannelTarget"))
+                        .filter(device -> device.getChannel().getChannelName().equals("CameraChannelFrame"))
                         .findFirst();
                 info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
-                        "Set Target Temp",
-                        "Set the target temperature",
-                        new Slider("Slider", "25", "°C"),
+                        "Camera Frame",
+                        "Gets the camera frame",
+                        new CameraStream("CameraStream"),
                         true,
-                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/thermostat/set_temp"),
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/camera/next_frame"),
                         deviceInfo.getChannel()
                 )));
-                actionController = new DeviceActionController("Thermostat Action Controller", "Thermostat Actions", deviceActions);
+                actionController = new DeviceActionController("Camera Action Controller", "Camera Actions", deviceActions);
                 break;
 
             case "Doorbell":
