@@ -11,11 +11,6 @@ import java.util.Random;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        int count = 0;
-        while (count != 1000){
-            System.out.println(Utils.processFrameFromVideo(count));
-            count++;
-        }
         HttpServer server = HttpServer.create(new InetSocketAddress(8080), 0);
 
         List<HouseholdDevice> devices = Mocking.householdDevices;
