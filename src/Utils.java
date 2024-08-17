@@ -43,6 +43,6 @@ public class Utils {
         String videoPath = Utils.videoPath;
         int realFrameNum = frameNum % 200;
         String formattedNumber = String.format("%03d", realFrameNum);
-        return Utils.encodeImageToBase64(videoPath + formattedNumber + ".jpg");
+        return "image:" + Utils.encodeImageToBase64(videoPath + formattedNumber + ".jpg");
     }
 }
