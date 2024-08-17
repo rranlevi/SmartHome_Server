@@ -98,7 +98,7 @@ public class Mocking {
                 deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("ACChannelPower", "/ac/power")));
                 break;
             case "Camera":
-                deviceData.add(new DeviceInfo(new Info("Current Frame", Utils.processFrameFromVideo(0), ""), new DeviceChannel("CameraChannelFrame", "/camera/frame")));
+                deviceData.add(new DeviceInfo(new Info("Live Feed", Utils.processFrameFromVideo(0), ""), new DeviceChannel("CameraChannelFrame", "/camera/frame")));
                 break;
             case "Doorbell":
                 deviceData.add(new DeviceInfo(new Info("Status", "Idle", ""), new DeviceChannel("DoorbellChannelStatus", "/doorbell/status")));
