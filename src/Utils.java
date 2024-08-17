@@ -8,7 +8,8 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 public class Utils {
-    public static final String videoPath = "Camera_Streams/camera_stream.mp4";
+    public static final String videoPath = "stream/ezgif-frame-";
+
     // Method to encode image to Base64
     public static String encodeImageToBase64(String imagePath) {
         imagePath = "Devices_Images/" + imagePath;
@@ -37,45 +38,8 @@ public class Utils {
 
     public static String processFrameFromVideo(int frameNum) {
         String videoPath = Utils.videoPath;
-        File videoFile = new File(videoPath);
-
-        if (!videoFile.exists()) {
-            System.out.println("Video file not found: " + videoPath);
-            return "";
-        }
-
-        try {
-            long fileSize = Files.size(Paths.get(videoPath));
-            // Updated estimated byte offset per frame (based on 20-second duration)
-            long byteOffsetPerFrame = 5709; // As calculated
-            long positionInFile = (frameNum * byteOffsetPerFrame) % fileSize;
-            System.out.println("Video file size: " + fileSize + " bytes");
-
-            if (positionInFile < fileSize) {
-                System.out.println("Simulated processing at byte position: " + positionInFile);
-
-                // Read the frame data (simulated)
-                try (FileInputStream videoInFile = new FileInputStream(videoFile)) {
-                    videoInFile.skip(positionInFile);
-                    byte[] frameData = new byte[(int) byteOffsetPerFrame];
-                    int bytesRead = videoInFile.read(frameData, 0, (int) byteOffsetPerFrame);
-
-                    if (bytesRead > 0) {
-                        // Convert the frame data to a Base64 string
-                        return Base64.getEncoder().encodeToString(frameData);
-                    } else {
-                        System.out.println("Could not read frame data.");
-                        return "";
-                    }
-                }
-            } else {
-                System.out.println("Frame number exceeds video length.");
-                return "";
-            }
-
-        } catch (IOException e) {
-            System.out.println("Error reading the video file: " + e.getMessage());
-            return "";
-        }
+        int realFrameNum = frameNum % 200;
+        String formattedNumber = String.format("%03d", realFrameNum);
+        return Utils.encodeImageToBase64(videoPath + formattedNumber + ".jpg");
     }
 }
