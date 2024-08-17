@@ -82,7 +82,7 @@ public class ServerController {
                 int read = reader.read(buffer);
                 String newValue = new String(buffer, 0, read).trim();
 
-                if (this.channelPath.equals("/camera/next_frame")) {
+                if (this.channelPath.equals("/camera/frame")) {
                     CameraStream cameraStream = null;
 
                     for (HouseholdDevice device : Mocking.householdDevices) {
@@ -96,7 +96,7 @@ public class ServerController {
                     if (cameraStream == null) {
                         return;
                     }
-                    int frameNum = Integer.parseInt(cameraStream.getCurrentFrameNum());
+                    int frameNum = Integer.parseInt(newValue);
                     newValue = Utils.processFrameFromVideo(frameNum);
                 }
 
