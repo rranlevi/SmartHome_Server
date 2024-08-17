@@ -37,6 +37,9 @@ public class Utils {
     }
 
     public static String processFrameFromVideo(int frameNum) {
+        if (frameNum <= 0) {
+            frameNum = 1;
+        }
         String videoPath = Utils.videoPath;
         int realFrameNum = frameNum % 200;
         String formattedNumber = String.format("%03d", realFrameNum);
