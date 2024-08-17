@@ -8,7 +8,7 @@ import java.nio.file.Paths;
 import java.util.Base64;
 
 public class Utils {
-    public static final String videoPath = "stream/ezgif-frame-";
+    public static final String videoPath = "stream/frame_";
 
     // Method to encode image to Base64
     public static String encodeImageToBase64(String imagePath) {
@@ -37,12 +37,9 @@ public class Utils {
     }
 
     public static String processFrameFromVideo(int frameNum) {
-        if (frameNum <= 0) {
-            frameNum = 1;
-        }
         String videoPath = Utils.videoPath;
-        int realFrameNum = (frameNum % 200) + 1;
-        String formattedNumber = String.format("%03d", realFrameNum);
+        int realFrameNum = frameNum % 452;
+        String formattedNumber = String.format("%05d", realFrameNum);
         return "image:" + Utils.encodeImageToBase64(videoPath + formattedNumber + ".jpg");
     }
 }
