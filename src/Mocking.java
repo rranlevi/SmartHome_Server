@@ -82,6 +82,54 @@ public class Mocking {
                 createMockDeviceFactoryInfo("Washing Machine")
         ));
 
+        mockDeviceDataController = createSpecialDeviceDataController("Heater");
+        devices.add(new HouseholdDevice(
+                "7",
+                "Heater",
+                "Living Room",
+                "Heater Description",
+                createSpecialDeviceDataController("Heater"),
+                createSpecialDeviceActionController("Heater", mockDeviceDataController),
+                Utils.encodeImageToBase64("heater.png"),
+                createMockDeviceFactoryInfo("Heater")
+        ));
+
+        mockDeviceDataController = createSpecialDeviceDataController("Refrigerator");
+        devices.add(new HouseholdDevice(
+                "8",
+                "Refrigerator",
+                "Kitchen",
+                "Refrigerator Description",
+                createSpecialDeviceDataController("Refrigerator"),
+                createSpecialDeviceActionController("Refrigerator", mockDeviceDataController),
+                Utils.encodeImageToBase64("fridge.png"),
+                createMockDeviceFactoryInfo("Refrigerator")
+        ));
+
+        mockDeviceDataController = createSpecialDeviceDataController("Oven");
+        devices.add(new HouseholdDevice(
+                "9",
+                "Oven",
+                "Kitchen",
+                "Oven Description",
+                createSpecialDeviceDataController("Oven"),
+                createSpecialDeviceActionController("Oven", mockDeviceDataController),
+                Utils.encodeImageToBase64("oven.png"),
+                createMockDeviceFactoryInfo("Oven")
+        ));
+
+        mockDeviceDataController = createSpecialDeviceDataController("Fan");
+        devices.add(new HouseholdDevice(
+                "10",
+                "Fan",
+                "Bedroom",
+                "Fan Description",
+                createSpecialDeviceDataController("Fan"),
+                createSpecialDeviceActionController("Fan", mockDeviceDataController),
+                Utils.encodeImageToBase64("fan.png"),
+                createMockDeviceFactoryInfo("Fan")
+        ));
+
         return devices;
     }
 
@@ -112,6 +160,22 @@ public class Mocking {
             case "Washing Machine":
                 deviceData.add(new DeviceInfo(new Info("Cycle", "Medium", ""), new DeviceChannel("WashingMachineChannelCycle", "/washingmachine/cycle")));
                 deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("WashingMachineChannelPower", "/washingmachine/power")));
+                break;
+            case "Heater":
+                deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("HeaterChannelPower", "/heater/power")));
+                deviceData.add(new DeviceInfo(new Info("Temperature", "22", "°C"), new DeviceChannel("HeaterChannelTemp", "/heater/temperature")));
+                break;
+            case "Refrigerator":
+                deviceData.add(new DeviceInfo(new Info("Temperature", "4", "°C"), new DeviceChannel("RefrigeratorChannelTemp", "/refrigerator/temperature")));
+                deviceData.add(new DeviceInfo(new Info("Power", "On", ""), new DeviceChannel("RefrigeratorChannelPower", "/refrigerator/power")));
+                break;
+            case "Oven":
+                deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("OvenChannelPower", "/oven/power")));
+                deviceData.add(new DeviceInfo(new Info("Temperature", "180", "°C"), new DeviceChannel("OvenChannelTemp", "/oven/temperature")));
+                break;
+            case "Fan":
+                deviceData.add(new DeviceInfo(new Info("Power", "Off", ""), new DeviceChannel("FanChannelPower", "/fan/power")));
+                deviceData.add(new DeviceInfo(new Info("Speed", "Medium", ""), new DeviceChannel("FanChannelSpeed", "/fan/speed")));
                 break;
             default:
                 break;
@@ -195,13 +259,6 @@ public class Mocking {
                 break;
 
             case "Doorbell":
-//                deviceActions.add(new DeviceAction(
-//                        "Ring",
-//                        "Ring the doorbell",
-//                        new Switch("Button","NotImplemented"),
-//                        true,
-//                        new DeviceChannel("DoorbellChannel", "/doorbell/ring")
-//                ));
                 actionController = new DeviceActionController("Doorbell Action Controller", "Doorbell Actions", deviceActions);
                 break;
 
@@ -271,6 +328,113 @@ public class Mocking {
                 actionController = new DeviceActionController("Washing Machine Action Controller", "Washing Machine Actions", deviceActions);
                 break;
 
+            case "Heater":
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("HeaterChannelPower"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
+                        "Power",
+                        "Turn the heater on or off",
+                        new Switch("Switch", false),
+                        true,
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/heater/set_power"),
+                        deviceInfo.getChannel()
+                )));
+
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("HeaterChannelTemp"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
+                        "Set Temperature",
+                        "Set the heater temperature",
+                        new Slider("Slider", "22", "°C"),
+                        true,
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/heater/set_temp"),
+                        deviceInfo.getChannel()
+                )));
+                actionController = new DeviceActionController("Heater Action Controller", "Heater Actions", deviceActions);
+                break;
+
+            case "Refrigerator":
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("RefrigeratorChannelPower"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
+                        "Power",
+                        "Turn the refrigerator on or off",
+                        new Switch("Switch", true),
+                        true,
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/refrigerator/set_power"),
+                        deviceInfo.getChannel()
+                )));
+
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("RefrigeratorChannelTemp"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
+                        "Set Temperature",
+                        "Set the refrigerator temperature",
+                        new Slider("Slider", "4", "°C"),
+                        true,
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/refrigerator/set_temp"),
+                        deviceInfo.getChannel()
+                )));
+                actionController = new DeviceActionController("Refrigerator Action Controller", "Refrigerator Actions", deviceActions);
+                break;
+
+            case "Oven":
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("OvenChannelPower"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
+                        "Power",
+                        "Turn the oven on or off",
+                        new Switch("Switch", false),
+                        true,
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/oven/set_power"),
+                        deviceInfo.getChannel()
+                )));
+
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("OvenChannelTemp"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
+                        "Set Temperature",
+                        "Set the oven temperature",
+                        new Slider("Slider", "180", "°C"),
+                        true,
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/oven/set_temp"),
+                        deviceInfo.getChannel()
+                )));
+                actionController = new DeviceActionController("Oven Action Controller", "Oven Actions", deviceActions);
+                break;
+
+            case "Fan":
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("FanChannelPower"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
+                        "Power",
+                        "Turn the fan on or off",
+                        new Switch("Switch", false),
+                        true,
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/fan/set_power"),
+                        deviceInfo.getChannel()
+                )));
+
+                info = mockDeviceDataController.getDeviceData().stream()
+                        .filter(device -> device.getChannel().getChannelName().equals("FanChannelSpeed"))
+                        .findFirst();
+                info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
+                        "Set Speed",
+                        "Set the fan speed",
+                        new Dropdown("Dropdown", new ArrayList<>(Arrays.asList("Low", "Medium", "High"))),
+                        true,
+                        new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/fan/set_speed"),
+                        deviceInfo.getChannel()
+                )));
+                actionController = new DeviceActionController("Fan Action Controller", "Fan Actions", deviceActions);
+                break;
             default:
                 actionController = new DeviceActionController("Default Action Controller", "Default Actions", deviceActions);
                 break;
@@ -309,6 +473,25 @@ public class Mocking {
             default:
                 factoryInfo.add(new Info("FactoryName", "Default Factory", ""));
                 factoryInfo.add(new Info("Manufacturer", "Default Manufacturer", ""));
+                break;
+            case "Heater":
+                factoryInfo.add(new Info("FactoryName", "Heater Factory", ""));
+                factoryInfo.add(new Info("Manufacturer", "HeatMaster", ""));
+                break;
+
+            case "Refrigerator":
+                factoryInfo.add(new Info("FactoryName", "Refrigerator Factory", ""));
+                factoryInfo.add(new Info("Manufacturer", "CoolTech", ""));
+                break;
+
+            case "Oven":
+                factoryInfo.add(new Info("FactoryName", "Oven Factory", ""));
+                factoryInfo.add(new Info("Manufacturer", "BakeBest", ""));
+                break;
+
+            case "Fan":
+                factoryInfo.add(new Info("FactoryName", "Fan Factory", ""));
+                factoryInfo.add(new Info("Manufacturer", "BreezeCo", ""));
                 break;
         }
         return factoryInfo;
