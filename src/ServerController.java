@@ -97,17 +97,6 @@ public class ServerController {
         for (HouseholdDevice device : Mocking.householdDevices) {
             for (DeviceInfo info : device.getDeviceDataController().getDeviceData()) {
                 if (info.getChannel().getChannelPath().equals(channelPath)) {
-                    if (channelPath.equals("/thermostat/current")) { //this if statement is only for mocking
-                        Optional<DeviceInfo> mockData = device.getDeviceDataController().getDeviceData().stream()
-                                .filter(mockDevice -> mockDevice.getChannel().getChannelName().equals("ThermostatChannelTarget"))
-                                .findFirst();
-                        if (mockData.isPresent()) {
-                            Random random = new Random();
-                            int currentTemp = Integer.parseInt(info.getDeviceInfo().getInfoValue());
-                            int targetTemp = Integer.parseInt(mockData.get().getDeviceInfo().getInfoValue());
-                            return Integer.toString(currentTemp + random.nextInt(0, (targetTemp - currentTemp) / 2));
-                        }
-                    }
                     return info.getDeviceInfo().getInfoValue();
                 }
             }
