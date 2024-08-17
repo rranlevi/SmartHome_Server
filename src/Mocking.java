@@ -209,7 +209,7 @@ public class Mocking {
                 info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Brightness",
                         "Turn the brightness up or down",
-                        new Slider("Slider", "0", ""),
+                        new Slider("Slider", "0", "", "0", "100"),
                         true,
                         new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/light/set_brightness"),
                         deviceInfo.getChannel()
@@ -235,7 +235,7 @@ public class Mocking {
                 info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Set Temperature",
                         "Turn the temperature up or down",
-                        new Slider("Slider", "25", "°C"),
+                        new Slider("Slider", "25", "°C", "16", "33"),
                         true,
                         new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/ac/set_temp"),
                         deviceInfo.getChannel()
@@ -293,7 +293,7 @@ public class Mocking {
                 info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Change the TV volume",
                         "Change the TV channel",
-                        new Slider("Slider", "10", ""),
+                        new Slider("Slider", "10", "", "0", "100"),
                         true,
                         new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/tv/set_volume"),
                         deviceInfo.getChannel()
@@ -347,7 +347,7 @@ public class Mocking {
                 info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Set Temperature",
                         "Set the heater temperature",
-                        new Slider("Slider", "22", "°C"),
+                        new Slider("Slider", "22", "°C", "20", "40"),
                         true,
                         new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/heater/set_temp"),
                         deviceInfo.getChannel()
@@ -374,7 +374,7 @@ public class Mocking {
                 info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Set Temperature",
                         "Set the refrigerator temperature",
-                        new Slider("Slider", "4", "°C"),
+                        new Slider("Slider", "4", "°C", "0", "16"),
                         true,
                         new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/refrigerator/set_temp"),
                         deviceInfo.getChannel()
@@ -401,7 +401,7 @@ public class Mocking {
                 info.ifPresent(deviceInfo -> deviceActions.add(new DeviceAction(
                         "Set Temperature",
                         "Set the oven temperature",
-                        new Slider("Slider", "180", "°C"),
+                        new Slider("Slider", "180", "°C", "30", "350"),
                         true,
                         new DeviceChannel(deviceInfo.getChannel().getChannelName(), "/oven/set_temp"),
                         deviceInfo.getChannel()
