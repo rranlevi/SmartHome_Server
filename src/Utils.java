@@ -42,13 +42,11 @@ public class Utils {
             return "";
         }
 
-        // Updated estimated byte offset per frame (based on 20-second duration)
-        long byteOffsetPerFrame = 5709; // As calculated
-
-        long positionInFile = frameNum * byteOffsetPerFrame;
-
         try {
             long fileSize = Files.size(Paths.get(videoPath));
+            // Updated estimated byte offset per frame (based on 20-second duration)
+            long byteOffsetPerFrame = 5709; // As calculated
+            long positionInFile = (frameNum * byteOffsetPerFrame) % fileSize;
             System.out.println("Video file size: " + fileSize + " bytes");
 
             if (positionInFile < fileSize) {

@@ -34,16 +34,16 @@ public class Mocking {
                 createMockDeviceFactoryInfo("AC")
         ));
 
-        mockDeviceDataController = createSpecialDeviceDataController("Thermostat");
+        mockDeviceDataController = createSpecialDeviceDataController("Camera");
         devices.add(new HouseholdDevice(
                 "3",
-                "Thermostat",
-                "Hallway",
-                "Thermostat Description",
-                createSpecialDeviceDataController("Thermostat"),
-                createSpecialDeviceActionController("Thermostat", mockDeviceDataController),
-                Utils.encodeImageToBase64("thermostat.png"),
-                createMockDeviceFactoryInfo("Thermostat")
+                "Camera",
+                "Living Room",
+                "Camera In Living Room",
+                createSpecialDeviceDataController("Camera"),
+                createSpecialDeviceActionController("Camera", mockDeviceDataController),
+                Utils.encodeImageToBase64("camera.png"),
+                createMockDeviceFactoryInfo("Camera")
         ));
 
         mockDeviceDataController = createSpecialDeviceDataController("Doorbell");
@@ -290,9 +290,9 @@ public class Mocking {
                 factoryInfo.add(new Info("FactoryName", "AC Factory", ""));
                 factoryInfo.add(new Info("Manufacturer", "AC Inc.", ""));
                 break;
-            case "Thermostat":
-                factoryInfo.add(new Info("FactoryName", "Thermostat Factory", ""));
-                factoryInfo.add(new Info("Manufacturer", "ThermoTech", ""));
+            case "Camera":
+                factoryInfo.add(new Info("FactoryName", "Camera Factory", ""));
+                factoryInfo.add(new Info("Manufacturer", "CamTech", ""));
                 break;
             case "Doorbell":
                 factoryInfo.add(new Info("FactoryName", "Doorbell Factory", ""));

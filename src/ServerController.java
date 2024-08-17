@@ -92,7 +92,8 @@ public class ServerController {
                             }
                         }
                     }
-                    if (cameraStream == null){
+
+                    if (cameraStream == null) {
                         return;
                     }
                     int frameNum = Integer.parseInt(cameraStream.getCurrentFrameNum());
