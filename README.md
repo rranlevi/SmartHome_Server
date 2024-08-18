@@ -1,6 +1,5 @@
 # UML References
 <img src="https://github.com/user-attachments/assets/27c11120-34d4-4fed-8ef0-769a8c52b0fd" alt="alt text" width="480" height="640">|
-<img src="https://github.com/rranlevi/SmartHome_Server/blob/master/Client_UML.png" alt="alt text" width="640" height="480">
 
 # Smart Home Server
 
@@ -19,6 +18,7 @@ The server supports a variety of household devices, each modeled and controlled 
 The system is designed to persist user selections. When a user selects a device or configures a specific setting, this information is saved by the server. On subsequent connections or sessions, the saved state is retrieved and presented to the user, allowing for a seamless experience across different sessions.
 
 ## Architectural Design
+<img src="https://github.com/rranlevi/SmartHome_Server/blob/master/Client_UML.png" alt="alt text" width="640" height="480">
 
 The system follows a modular design, with each component playing a specific role:
 
