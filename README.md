@@ -1,4 +1,6 @@
+# UML References
 <img src="https://github.com/user-attachments/assets/27c11120-34d4-4fed-8ef0-769a8c52b0fd" alt="alt text" width="480" height="640">|
+<img src="https://github.com/rranlevi/SmartHome_Server/blob/master/Client_UML.png" alt="alt text" width="640" height="480">
 
 # Smart Home Server
 
@@ -57,13 +59,14 @@ https://github.com/user-attachments/assets/52f4eb5c-b1d1-44f4-a443-f944792480af
 - **Enhanced Security**: Implement additional security measures to protect user data and device configurations.
 - **Mobile Application**: Develop a dedicated mobile app for easier access and control of the smart home system.
 
-## Contributing
+## Credits
 
-Contributions to this project are welcome! If you have any ideas for new features or improvements, please open an issue or submit a pull request.
+This project was made possible by the contributions of the following individuals:
 
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for more details.
+- **Ran Levi**
+- **Harel Markel**
+- **Alex Makarov**
+- **Ron Yamin**
 
 ## Contact
 
