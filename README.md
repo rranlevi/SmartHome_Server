@@ -1,6 +1,3 @@
-# UML References
-<img src="https://github.com/rranlevi/SmartHome_Server/blob/master/Client_UML.png" alt="alt text" width="640" height="480">
-
 # Smart Home Server
 
 ## Overview
@@ -186,6 +183,12 @@ https://github.com/user-attachments/assets/98e5a308-b46c-4a67-9109-ac508599a38f
 https://github.com/user-attachments/assets/52f4eb5c-b1d1-44f4-a443-f944792480af
 
 
+**UML Reference**
+
+
+
+
+<img src="https://github.com/rranlevi/SmartHome_Server/blob/master/Client_UML.png" alt="alt text" width="620" height="320">
 
 ## Credits
 
