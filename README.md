@@ -31,26 +31,23 @@ The system follows a modular design, with each component playing a specific role
 
 ## How to Use
 
-1. **Setup the Server**: Clone the repository and follow the setup instructions to start the server.
-2. **Connect Devices**: Add your household devices to the system by configuring them in the server's configuration file.
-3. **Access the Client UI**: Open the client-side application in a web browser. The UI will be generated dynamically based on the devices configured on the server.
-4. **Save and Retrieve Selections**: Any selections or configurations made through the UI will be automatically saved by the server. When you reconnect to the system, your previous selections will be loaded.
+1. **Setup**: Clone the client and server repositories, first run the server then the client as shown in the video below.
+2. **Add Devices**: Add your household devices by opening a window with the server-connected devices through the button.
+3. **Actions & Data**: After adding devices from the server enter the Actions & Data page, send data to the devices through the server, and see live data.
 
-<u>Walkthrough Videos:</u>
-
-
-https://github.com/user-attachments/assets/43be45dc-355b-41c6-9e5a-320953e870b8
+**Walkthrough Videos**:
 
 
 
+https://github.com/user-attachments/assets/98e5a308-b46c-4a67-9109-ac508599a38f
 
-https://github.com/user-attachments/assets/09fbca6f-e40b-4906-bc6c-7416e927d6e1
 
 
 
 
 
 https://github.com/user-attachments/assets/52f4eb5c-b1d1-44f4-a443-f944792480af
+
 
 
 
