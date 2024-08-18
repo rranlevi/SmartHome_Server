@@ -23,7 +23,7 @@ The system is designed to persist user selections. When a user selects a device 
 The system follows a modular design, with each component playing a specific role:
 
 - **Device Class**: The base class for all devices, containing common attributes such as `deviceName` and `description`.
-- **HouseholdDevice Class**: Extends the `Device` class, adding additional attributes like `deviceController`, `deviceData`, and `deviceRoom`.
+- **HouseholdDevice Class**: Extends the `Device` class, designed so we can represent every new smart home device in the future, every device have dataController for device realtime data and actionController for sending commands.
 - **DeviceAction and Widget Classes**: Handle specific actions and UI elements associated with devices. These classes ensure that each device can interact with the user interface seamlessly.
 - **Controllers**: The `DeviceActionController` and `DeviceDataController` manage the actions and data related to devices. They ensure that commands and data flows are handled correctly and are kept in sync with the server.
 - **Info and DeviceInfo Classes**: Store information related to devices, which is used to generate the UI and manage device states.
