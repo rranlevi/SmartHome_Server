@@ -33,6 +33,11 @@ The system follows a modular design, with each component playing a specific role
 3. **Access the Client UI**: Open the client-side application in a web browser. The UI will be generated dynamically based on the devices configured on the server.
 4. **Save and Retrieve Selections**: Any selections or configurations made through the UI will be automatically saved by the server. When you reconnect to the system, your previous selections will be loaded.
 
+Walkthrough - 
+<video width="320" height="240" controls>
+  <source src="Walkthrough_Videos/Media1.mp4" type="video/mp4">
+</video>
+
 ## Project Requirements
 
 - **Support for More Device Types**: The system can be extended to support a broader range of smart home devices.
