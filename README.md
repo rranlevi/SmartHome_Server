@@ -33,12 +33,21 @@ The system follows a modular design, with each component playing a specific role
 3. **Access the Client UI**: Open the client-side application in a web browser. The UI will be generated dynamically based on the devices configured on the server.
 4. **Save and Retrieve Selections**: Any selections or configurations made through the UI will be automatically saved by the server. When you reconnect to the system, your previous selections will be loaded.
 
-Walkthrough Videos - 
+<u>Walkthrough Videos:</u>
 
-https://github.com/user-attachments/assets/b9c1207e-9106-49b1-aa6d-f29316a56a27
-https://github.com/user-attachments/assets/7e1736d3-a2aa-4a8b-a2a4-c7be8627e724
-https://github.com/user-attachments/assets/6dc8d1a9-f46e-4097-a9c7-38305292d270
 
+https://github.com/user-attachments/assets/43be45dc-355b-41c6-9e5a-320953e870b8
+
+
+
+
+https://github.com/user-attachments/assets/09fbca6f-e40b-4906-bc6c-7416e927d6e1
+
+
+
+
+
+https://github.com/user-attachments/assets/52f4eb5c-b1d1-44f4-a443-f944792480af
 
 
 
