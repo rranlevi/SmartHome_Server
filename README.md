@@ -18,15 +18,21 @@ The server supports a variety of household devices, each modeled and controlled 
 The system is designed to persist user selections. When a user selects a device or configures a specific setting, this information is saved by the server. On subsequent connections or sessions, the saved state is retrieved and presented to the user, allowing for a seamless experience across different sessions.
 
 ## Architectural Design
-<img src="https://github.com/user-attachments/assets/27c11120-34d4-4fed-8ef0-769a8c52b0fd" alt="alt text" width="480" height="640">|
 
-The system follows a modular design, with each component playing a specific role:
+<div style="display: flex; align-items: flex-start;">
+    <div style="flex: 1;">
+        The system follows a modular design, with each component playing a specific role:
 
-- **Device Class**: The base class for all devices, containing common attributes such as `deviceName` and `description`.
-- **HouseholdDevice Class**: Extends the `Device` class, designed so we can represent every new smart home device in the future, every device have dataController for device realtime data and actionController for sending commands:
-  - **Controllers**: The `DeviceActionController` and `DeviceDataController` manage the actions and data related to devices. They ensure that commands and data flows are handled correctly and are kept in sync with the server.
-- **Info and DeviceInfo Classes**: Store information related to devices, which is used to generate the UI and manage device states.
-- **DeviceAction and Widget Classes**: Handle specific actions and UI elements associated with devices. These classes ensure that each device can interact with the user interface seamlessly, and it is the key-feature for scalability in our project (easy support for new devices in the future).
+        - **Device Class**: The base class for all devices, containing common attributes such as `deviceName` and `description`.
+        - **HouseholdDevice Class**: Extends the `Device` class, designed so we can represent every new smart home device in the future, every device has a `dataController` for device real-time data and an `actionController` for sending commands:
+            - **Controllers**: The `DeviceActionController` and `DeviceDataController` manage the actions and data related to devices. They ensure that commands and data flows are handled correctly and are kept in sync with the server.
+        - **Info and DeviceInfo Classes**: Store information related to devices, which is used to generate the UI and manage device states.
+        - **DeviceAction and Widget Classes**: Handle specific actions and UI elements associated with devices. These classes ensure that each device can interact with the user interface seamlessly, and it is the key-feature for scalability in our project (easy support for new devices in the future).
+    </div>
+    <div style="flex-shrink: 0; margin-left: 20px;">
+        <img src="https://github.com/user-attachments/assets/27c11120-34d4-4fed-8ef0-769a8c52b0fd" alt="alt text" width="480" height="640">
+    </div>
+</div>
 
 ## How to Use
 
