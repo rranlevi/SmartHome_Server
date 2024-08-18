@@ -34,9 +34,9 @@ The system follows a modular design, with each component playing a specific role
 4. **Save and Retrieve Selections**: Any selections or configurations made through the UI will be automatically saved by the server. When you reconnect to the system, your previous selections will be loaded.
 
 Walkthrough - 
-<video width="320" height="240" controls>
-  <source src="Walkthrough_Videos/Media1.mp4" type="video/mp4">
-</video>
+
+https://github.com/user-attachments/assets/52feb402-17d2-462e-add0-fcec74712e51
+
 
 ## Project Requirements
 
