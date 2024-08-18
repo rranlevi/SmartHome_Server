@@ -3,7 +3,7 @@
 # Smart Home Server
 
 ## Overview
-This project is a Smart Home Server implementation that facilitates the management and control of various household smart devices. The system is designed with a clear and structured architecture that dynamically generates the user interface (UI) on the client side, based on the devices available and their states. The server not only handles the logic and data processing for these devices but also ensures that the user's selection of devices is saved and can be retrieved for future sessions.
+This This project is a Smart Home Server implementation that facilitates the management and control of various household smart devices. The system is designed with a clear and structured architecture that dynamically generates the user interface (UI) on the client side, based on the devices available and their states. The server not only handles the logic and data processing for these devices but also ensures that the user's selection of devices is saved and can be retrieved for future sessions.
 
 ## Key Features
 
